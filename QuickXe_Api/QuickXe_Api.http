@@ -1,0 +1,6 @@
+@QuickXe_Api_HostAddress = http://localhost:5068
+
+GET {{QuickXe_Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

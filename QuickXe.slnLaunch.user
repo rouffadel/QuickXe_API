@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "QuickXe_Api\\QuickXe_Api.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
