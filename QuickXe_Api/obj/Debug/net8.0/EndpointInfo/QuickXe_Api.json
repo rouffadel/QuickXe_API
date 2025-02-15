@@ -476,6 +476,10 @@
             "type": "number",
             "format": "double",
             "nullable": true
+          },
+          "tenantId": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

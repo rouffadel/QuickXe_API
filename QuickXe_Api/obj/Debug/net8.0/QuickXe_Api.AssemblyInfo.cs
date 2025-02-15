@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QuickXe_Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2da30856fea5b28ab537de28637e3f0b81ab101c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35214579a258cd114e4728f7a4cd34ebf60e13ce")]
 [assembly: System.Reflection.AssemblyProductAttribute("QuickXe_Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QuickXe_Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
