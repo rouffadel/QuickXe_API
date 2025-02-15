@@ -17,6 +17,7 @@ namespace DAL.DTO
         public string? CurrencyName { get; set; }
         public double? BuyRate { get; set; }
         public double? SellRate { get; set; }
+        public string? TenantId { get; set; }
 
     }
 }

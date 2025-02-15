@@ -113,6 +113,7 @@ namespace CountryAPI.Controllers
                         CurrencyName = country.CurrencyName,
                         BuyRate = country.BuyRate,
                         SellRate = country.SellRate,
+                        TenantId = country.TenantId,
                     };
 
                     _context.Countries.Add(countryDetail);

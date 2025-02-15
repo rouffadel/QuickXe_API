@@ -158,6 +158,43 @@ namespace QuickXe_Api.Controllers
 
             return rawToken;
         }
+
+
+    //    private async Task<JwtSecurityToken> CreateJwtSecurityTokenAsync(ApplicationUser user, string issuer, string audience, string secret)
+    //    {
+    //        // Generate claims for the user
+    //        List<Claim> identityClaims = new()
+    //{
+    //    new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64), // iat
+    //    new Claim(JwtRegisteredClaimNames.Iss, issuer), // iss
+    //    new Claim(JwtRegisteredClaimNames.Exp, DateTimeOffset.UtcNow.AddHours(3).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64), // exp
+    //    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // User's unique identifier
+    //    new Claim(ClaimTypes.Name, user.UserName) // User's username
+    //};
+
+    //        // Add roles to the claims if the user has any
+    //        IList<string> userRoles = await _userManager.GetRolesAsync(user);
+    //        foreach (string roleName in userRoles)
+    //        {
+    //            identityClaims.Add(new Claim(ClaimTypes.Role, roleName));
+    //        }
+
+    //        // Create the JWT
+    //        JwtSecurityToken token = new(
+    //            issuer: issuer,
+    //            audience: audience,
+    //            claims: identityClaims,
+    //            expires: DateTime.UtcNow.AddHours(3), // Token expiration time
+    //            signingCredentials: new SigningCredentials(
+    //                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
+    //                SecurityAlgorithms.HmacSha256) // Signing algorithm
+    //        );
+
+    //        return token;
+    //    }
+
+
+
         private string GenerateRefreshToken()
         {
             var randomNumber = new byte[32];
