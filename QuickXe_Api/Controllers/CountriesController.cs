@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace CountryAPI.Controllers
 {
     //[Authorize(Roles = "Admin")]
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CountriesController : ControllerBase
@@ -26,12 +26,37 @@ namespace CountryAPI.Controllers
         }
 
         // GET: api/Countries
+        //[HttpGet]
+        //public async Task<IActionResult> GetCountries()
+        //{
+        //    var countries = await _context.Countries.ToListAsync();
+        //    return Ok(countries);
+        //}
+
+
         [HttpGet]
         public async Task<IActionResult> GetCountries()
         {
-            var countries = await _context.Countries.ToListAsync();
+            var countries = await _context.Countries
+                .Select(country => new
+                {
+                    country.CountryName,
+                    country.CountryId,
+                    country.CountryCode,
+                    country.CurrencyName,
+                    country.BuyRate,
+                    country.SellRate,
+                    country.TenantId,
+                    TenantName = _context.ApplicationUser
+                        .Where(user => user.Id == country.TenantId)
+                        .Select(user => user.ContactName)
+                        .FirstOrDefault()
+                })
+                .ToListAsync();
+
             return Ok(countries);
         }
+
 
 
         // GET: api/Countries/{id}

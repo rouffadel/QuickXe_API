@@ -9,8 +9,11 @@ namespace DAL.Models
 {
     public class LoginResponse
     {
+        public string ContactName { get; set; }
+        public string ContactNo { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
+        public string CompanyName { get; set; }
         public string UserId { get; set; }
         public int Id { get; set; }
         public string Token { get; set; }

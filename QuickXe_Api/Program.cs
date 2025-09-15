@@ -1,6 +1,7 @@
 using DAL;
 using DAL.DAO;
 using DAL.Interface;
+using DAL.Models;
 using DAL.Services;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,12 +16,24 @@ using QuickXe_Api.Middleware;
 using QuickXe_Api.SecurityProvider;
 using System.Text;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllers()
     .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
+
+builder.Services.AddScoped<IMailService, MailService>();
+
 
 builder.Services.AddSwaggerGen(setup =>
 {
@@ -129,6 +142,7 @@ app.UseDirectoryBrowser();
 app.UseRouting();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors();

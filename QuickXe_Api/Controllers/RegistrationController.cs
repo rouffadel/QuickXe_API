@@ -1,5 +1,7 @@
-﻿using DAL;
+﻿using Azure;
+using DAL;
 using DAL.DAO;
+using DAL.DTO;
 using DAL.Exceptions;
 using DAL.Interface;
 using DAL.Models;
@@ -12,11 +14,19 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
+using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using LoginRequest = DAL.Models.LoginRequest;
 using ResetPasswordRequest = DAL.Models.ResetPasswordRequest;
+using System.IO;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 
 namespace QuickXe_Api.Controllers
 {
@@ -25,6 +35,8 @@ namespace QuickXe_Api.Controllers
 
     public class RegistrationController : ControllerBase
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
         private readonly IRegistrationService _registration;
         private readonly IConfiguration _configuration;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -32,9 +44,11 @@ namespace QuickXe_Api.Controllers
         private readonly OrganizationDbContext _context;
 
 
-        public RegistrationController(IRegistrationService registration, IConfiguration configuration, UserManager<ApplicationUser> userManager,
+        public RegistrationController(IWebHostEnvironment webHostEnvironment, IRegistrationService registration, IConfiguration configuration, UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager, OrganizationDbContext context)
         {
+            _webHostEnvironment = webHostEnvironment;
+
             _registration = registration;
             _configuration = configuration;
             _userManager = userManager;
@@ -44,27 +58,26 @@ namespace QuickXe_Api.Controllers
 
         }
 
-        //// GET: api/Registration
-        //[HttpGet("registered_user")]
-        //public async Task<IActionResult> GetApplicationUser()
-        //{
-        //    var tenants = await _context.ApplicationUser.ToListAsync();
-        //    return Ok(tenants);
-        //}
-
-
-        // GET: api/Registration
-        [Authorize]
-        [HttpGet("registered_user")]
+     
+        [HttpGet("registereduser")]
         public async Task<IActionResult> GetApplicationUser()
         {
+            var admin = await _context.ApplicationRoles
+                .Where(x => x.Name == "Admin")
+                .FirstOrDefaultAsync(); // Gets the first matching role or null
+
             var tenants = await _context.ApplicationUser
+                .Where(user => user.RoleId != admin.Id)
                 .Select(user => new
                 {
                     user.ContactName,
                     user.Email,
                     user.ContactNo,
-                    user.CompanyName
+                    user.CompanyName,
+                    user.EmailStatus,
+                    user.IsActive,
+                    user.CreateDate,
+                    user.ActivationDate
                 })
                 .ToListAsync();
 
@@ -72,6 +85,119 @@ namespace QuickXe_Api.Controllers
         }
 
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserById(string id)
+        {
+            var user = await _context.ApplicationUser.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userDto = new
+            {
+                user.ContactName,
+                user.Email,
+                user.ContactNo,
+                user.CompanyName,
+                user.Country,
+                user.State,
+                user.District,
+                user.Latitude,
+                user.Longitude
+            };
+
+            return Ok(userDto);
+        }
+
+
+
+        [HttpGet("ByUser/{email}")]
+        public async Task<IActionResult> GetEmailCodeByEmailId(string email)
+        {
+            var emailCode = await _context.ApplicationUser
+                .Where(a => a.Email == email)
+                .Join(_context.SendEmails,
+                      a => a.Id,
+                      s => s.UserId,
+                      (a, s) => s.EmailCode)
+                .FirstOrDefaultAsync();
+
+            if (emailCode == null)
+            {
+                return NotFound(new { Status = "Error", Message = "Email not found" });
+            }
+
+            // Send the email
+            bool emailSent = await SendEmailAsync(email, emailCode);
+
+            if (emailSent)
+            {
+                return Ok(new { Status = "OK", Message = "Email sent successfully" });
+            }
+            else
+            {
+                return StatusCode(500, new { Status = "Error", Message = "Failed to send email" });
+            }
+        }
+
+    
+        private async Task<bool> SendEmailAsync(string toEmail, string emailCode)
+        {
+            try
+            {
+                string subject = "Registration Successful!!!";
+
+                // Get the absolute path of the email template
+                string templatePath = Path.Combine(_webHostEnvironment.ContentRootPath, "Templates", "EmailTemplate.html");
+
+                if (!System.IO.File.Exists(templatePath))
+                {
+                    return false; // File not found
+                }
+
+                // Read the email template file
+                string body = await System.IO.File.ReadAllTextAsync(templatePath, Encoding.UTF8);
+
+                // Replace placeholder with actual reset password link
+                string resetPasswordTemplate = _configuration["AppSettings:ResetPasswordUrl"];
+                string resetPasswordLink = resetPasswordTemplate.Replace("{code}", emailCode);
+
+                body = body.Replace("{{ResetPasswordLink}}", resetPasswordLink);
+
+                string key = _configuration["SmtpSettings:Password"];
+                string host = _configuration["SmtpSettings:Host"]; 
+                string port = _configuration["SmtpSettings:Port"];
+                string userName = _configuration["SmtpSettings:UserName"];
+
+
+                using (var client = new SmtpClient(host))
+                {
+                    client.Port = int.Parse(port);
+                    client.Credentials = new NetworkCredential(userName, key);
+                    client.EnableSsl = true;
+
+                    var mailMessage = new MailMessage
+                    {
+                        From = new MailAddress(userName, "QuickXe Support"),
+                        Subject = subject,
+                        Body = body,
+                        IsBodyHtml = true
+                    };
+                    mailMessage.To.Add(toEmail);
+
+                    await client.SendMailAsync(mailMessage);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Email sending failed: {ex.Message}");
+                return false;
+            }
+        }
 
 
 
@@ -83,17 +209,107 @@ namespace QuickXe_Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            try
+            using (var transaction = await _context.Database.BeginTransactionAsync())
             {
-                var response = await _registration.Register(model);
-                return Ok(new { Status = "OK", Data = response });
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { Status = "Error", Message = ex.Message.ToString() });
+                try
+                {
+                    // First, insert the registration record
+                    var response = await _registration.Register(model);
 
+                    // Create a SendEmail object
+                    var sendEmailDto = new CreateSendEmailDTO
+                    {
+                        UserId = response.UserId, // Assuming response has UserId
+                    };
+
+                    // Add the SendEmail record
+                    SendEmail sendEmailDetail = new SendEmail()
+                    {
+                        UserId = sendEmailDto.UserId,
+                    };
+
+                    _context.SendEmails.Add(sendEmailDetail);
+
+                    // Save both changes in the transaction
+                    await _context.SaveChangesAsync();
+
+                    // Commit transaction
+                    await transaction.CommitAsync();
+
+                    return Ok(new { Status = "OK", Data = response });
+                }
+                catch (Exception ex)
+                {
+                    await transaction.RollbackAsync();
+                    return BadRequest(new { Status = "Error", Message = ex.Message.ToString() });
+                }
             }
         }
+
+
+
+        [HttpPut("updateuser/{id}")]
+        public async Task<IActionResult> UpdateUser(string id, [FromBody] UpdateUserDTO model)
+        {
+            if (string.IsNullOrEmpty(id))
+                return BadRequest("User ID is required.");
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+                return NotFound("User not found.");
+
+            // Update only the specified fields
+            user.ContactName = model.ContactName;
+            user.ContactNo = model.ContactNo;
+            user.CompanyName = model.CompanyName;
+            user.Country = model.Country;
+            user.State = model.State;
+            user.District = model.District;
+            user.Latitude = model.Latitude;
+            user.Longitude = model.Longitude;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+
+            return Ok(new { Status = "OK", Data = "User updated successfully." });
+        }
+
+
+        [HttpPut("updateisactive/{username}")]
+        public async Task<IActionResult> UpdateIsActive(string username, [FromBody] UpdateIsActiveDTO model)
+        {
+            if (string.IsNullOrEmpty(username))
+                return BadRequest("User name is required.");
+
+            //var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByEmailAsync(username);
+            if (user == null)
+                return NotFound("User not found.");
+
+            // Update only the specified fields
+            user.IsActive = model.IsActive;
+            user.ActivationDate = model.ActivationDate;
+            //user.ContactName = model.ContactName;
+            //user.ContactNo = model.ContactNo;
+            //user.CompanyName = model.CompanyName;
+            //user.Country = model.Country;
+            //user.State = model.State;
+            //user.District = model.District;
+            //user.Latitude = model.Latitude;
+            //user.Longitude = model.Longitude;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+
+            return Ok(new { Status = "OK", Data = "IsActive updated successfully." });
+        }
+
+
+
 
         private static void ValidateModel(LoginRequest model)
         {
@@ -202,6 +418,8 @@ namespace QuickXe_Api.Controllers
             rng.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber);
         }
+
+
         [AllowAnonymous]
         [HttpPost("login")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TokenResponse))]
@@ -240,7 +458,7 @@ namespace QuickXe_Api.Controllers
 
                 if (result.Succeeded)
                 {
-                    return Ok("Password reset successfully.");
+                    return Ok(new { Status = "OK", Data = "Reset Successfully" });
                 }
                 else
                 {

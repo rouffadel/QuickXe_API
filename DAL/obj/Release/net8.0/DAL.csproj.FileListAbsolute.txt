@@ -1,0 +1,15 @@
+D:\Fadel-Projects\QuickXe_API\DAL\bin\Release\net8.0\DAL.deps.json
+D:\Fadel-Projects\QuickXe_API\DAL\bin\Release\net8.0\DAL.runtimeconfig.json
+D:\Fadel-Projects\QuickXe_API\DAL\bin\Release\net8.0\DAL.dll
+D:\Fadel-Projects\QuickXe_API\DAL\bin\Release\net8.0\DAL.pdb
+D:\Fadel-Projects\QuickXe_API\DAL\obj\Release\net8.0\DAL.csproj.AssemblyReference.cache
+D:\Fadel-Projects\QuickXe_API\DAL\obj\Release\net8.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Fadel-Projects\QuickXe_API\DAL\obj\Release\net8.0\DAL.AssemblyInfoInputs.cache
+D:\Fadel-Projects\QuickXe_API\DAL\obj\Release\net8.0\DAL.AssemblyInfo.cs
+D:\Fadel-Projects\QuickXe_API\DAL\obj\Release\net8.0\DAL.csproj.CoreCompileInputs.cache
+D:\Fadel-Projects\QuickXe_API\DAL\obj\Release\net8.0\DAL.sourcelink.json
+D:\Fadel-Projects\QuickXe_API\DAL\obj\Release\net8.0\DAL.dll
+D:\Fadel-Projects\QuickXe_API\DAL\obj\Release\net8.0\refint\DAL.dll
+D:\Fadel-Projects\QuickXe_API\DAL\obj\Release\net8.0\DAL.pdb
+D:\Fadel-Projects\QuickXe_API\DAL\obj\Release\net8.0\DAL.genruntimeconfig.cache
+D:\Fadel-Projects\QuickXe_API\DAL\obj\Release\net8.0\ref\DAL.dll

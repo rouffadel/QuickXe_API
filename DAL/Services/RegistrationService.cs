@@ -51,10 +51,12 @@ namespace DAL.Services
                         Email = model.Email,
                         //PhoneNumber = model.MobileNumber,
                         ContactName = $"{model.FirstName} {model.LastName}",
-                        //ContactNo = model.MobileNumber,
+                        ContactNo = model.MobileNumber,
                         CreateDate = DateTime.Now,
                         IsApproved = false,
                         CompanyName = model.CompanyName,
+                        IsActive = model.IsActive,
+                        PersonalVisitForRegistration = model.PersonalVisitForRegistration
                     };
 
                     var result = await _userManager.CreateAsync(newUser, model.Password);
@@ -67,6 +69,7 @@ namespace DAL.Services
                         registrationResponse.Email = newUser.Email;
                         registrationResponse.Status = true;
                         registrationResponse.Message = "User created successfully!";
+                        registrationResponse.UserId = newUser.Id;
                     }
                     else
                     {
@@ -133,7 +136,10 @@ namespace DAL.Services
                             }
                         }
 
+                        loginResponse.ContactName = user.ContactName;
+                        loginResponse.ContactNo = user.ContactNo;
                         loginResponse.Username = user.UserName;
+                        loginResponse.CompanyName = user.CompanyName;
                         loginResponse.UserId = user.Id;
                         loginResponse.Email = user.Email;
                         loginResponse.ValidTo = rawToken.ValidTo;
@@ -151,7 +157,7 @@ namespace DAL.Services
                 else
                 {
                     loginResponse.Status = false;
-                    loginResponse.Message = "User doesn't exist";
+                    loginResponse.Message = "User does not exist";
                 }
                 return loginResponse;
             }

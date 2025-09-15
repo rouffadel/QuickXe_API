@@ -11,6 +11,8 @@ namespace DAL.Models
         public string Email { get; set; }
         public string Message { get; set; }
         public bool Status { get; set; }
+        public string UserId { get; set; }
+
 
 
     }

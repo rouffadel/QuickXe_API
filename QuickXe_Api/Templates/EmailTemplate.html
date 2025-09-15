@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .email-container {
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            color: #007bff;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-top: 20px;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+            .logo-container img {
+                height: 100px;
+                width: auto;
+            }
+    </style>
+</head>
+<body>
+    <div class='email-container'>
+        <div class="logo-container">
+            <img src="https://i.postimg.cc/8kXQT2Ss/Quick-Xe-Nbg.png">
+        </div>        
+        <div class='mt-8 header' style='color:#424242;'>Welcome to QuickXe!</div>
+        <div class='content'>
+            <p>Congratulations! You have been registered successfully on our platform.</p>
+            <p>Please <strong>set your password</strong>.</p>
+            <div class='button-container'>
+                <a href='{{ResetPasswordLink}}' class='button' style='background-color: #ffb300;'>Get Started!</a>
+            </div>
+            <p>Best regards, <br> <strong>QuickXe Support</strong></p>
+        </div>
+        <div class='footer'> &copy; 2025 QuickXe. All rights reserved. </div>
+    </div>
+</body>
+</html>

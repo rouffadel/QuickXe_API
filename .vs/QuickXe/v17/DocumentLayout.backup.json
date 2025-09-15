@@ -1,12 +1,197 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Fadel-Projects\\QuickXe_API\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|d:\\fadel-projects\\quickxe_api\\quickxe_api\\controllers\\registrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|solutionrelative:quickxe_api\\controllers\\registrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|d:\\fadel-projects\\quickxe_api\\quickxe_api\\controllers\\countriesmasterscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|solutionrelative:quickxe_api\\controllers\\countriesmasterscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|d:\\fadel-projects\\quickxe_api\\quickxe_api\\controllers\\countriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|solutionrelative:quickxe_api\\controllers\\countriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|d:\\fadel-projects\\quickxe_api\\quickxe_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|solutionrelative:quickxe_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|d:\\fadel-projects\\quickxe_api\\quickxe_api\\templates\\emailtemplate.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|solutionrelative:quickxe_api\\templates\\emailtemplate.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|d:\\fadel-projects\\quickxe_api\\quickxe_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|solutionrelative:quickxe_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|d:\\fadel-projects\\quickxe_api\\quickxe_api\\images\\quick_xenbg.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|solutionrelative:quickxe_api\\images\\quick_xenbg.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|d:\\fadel-projects\\quickxe_api\\quickxe_api\\controllers\\sendemailscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|solutionrelative:quickxe_api\\controllers\\sendemailscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|d:\\fadel-projects\\quickxe_api\\quickxe_api\\controllers\\mailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|solutionrelative:quickxe_api\\controllers\\mailcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|d:\\fadel-projects\\quickxe_api\\quickxe_api\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|solutionrelative:quickxe_api\\controllers\\customerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|d:\\fadel-projects\\quickxe_api\\quickxe_api\\controllers\\customerotpscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{63123540-C1D2-4B0B-BEAD-149939DBA560}|QuickXe_Api\\QuickXe_Api.csproj|solutionrelative:quickxe_api\\controllers\\customerotpscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SendEmailsController.cs",
+              "DocumentMoniker": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\SendEmailsController.cs",
+              "RelativeDocumentMoniker": "QuickXe_Api\\Controllers\\SendEmailsController.cs",
+              "ToolTip": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\SendEmailsController.cs",
+              "RelativeToolTip": "QuickXe_Api\\Controllers\\SendEmailsController.cs",
+              "ViewState": "AgIAALUAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T05:49:53.357Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MailController.cs",
+              "DocumentMoniker": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\MailController.cs",
+              "RelativeDocumentMoniker": "QuickXe_Api\\Controllers\\MailController.cs",
+              "ToolTip": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\MailController.cs",
+              "RelativeToolTip": "QuickXe_Api\\Controllers\\MailController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T05:48:47.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CustomersController.cs",
+              "DocumentMoniker": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\CustomersController.cs",
+              "RelativeDocumentMoniker": "QuickXe_Api\\Controllers\\CustomersController.cs",
+              "ToolTip": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\CustomersController.cs",
+              "RelativeToolTip": "QuickXe_Api\\Controllers\\CustomersController.cs",
+              "ViewState": "AgIAAN4AAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T05:48:37.684Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CustomerOTPsController.cs",
+              "DocumentMoniker": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\CustomerOTPsController.cs",
+              "RelativeDocumentMoniker": "QuickXe_Api\\Controllers\\CustomerOTPsController.cs",
+              "ToolTip": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\CustomerOTPsController.cs",
+              "RelativeToolTip": "QuickXe_Api\\Controllers\\CustomerOTPsController.cs",
+              "ViewState": "AgIAAHcBAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T05:48:21.501Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RegistrationController.cs",
+              "DocumentMoniker": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\RegistrationController.cs",
+              "RelativeDocumentMoniker": "QuickXe_Api\\Controllers\\RegistrationController.cs",
+              "ToolTip": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\RegistrationController.cs",
+              "RelativeToolTip": "QuickXe_Api\\Controllers\\RegistrationController.cs",
+              "ViewState": "AgIAAAcBAAAAAAAAAAAAABYBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-10T05:05:27.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Quick_XeNbg.png -  [English (United States)] - PNG [753x331, 32 bit, PNG]",
+              "DocumentMoniker": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Images\\Quick_XeNbg.png",
+              "RelativeDocumentMoniker": "QuickXe_Api\\Images\\Quick_XeNbg.png",
+              "ToolTip": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Images\\Quick_XeNbg.png -  [English (United States)] - PNG [753x331, 32 bit, PNG]",
+              "RelativeToolTip": "QuickXe_Api\\Images\\Quick_XeNbg.png -  [English (United States)] - PNG [753x331, 32 bit, PNG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-04-08T05:50:05.907Z",
+              "EditorCaption": " -  [English (United States)] - PNG [753x331, 32 bit, PNG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Program.cs",
+              "RelativeDocumentMoniker": "QuickXe_Api\\Program.cs",
+              "ToolTip": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Program.cs",
+              "RelativeToolTip": "QuickXe_Api\\Program.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAACkAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T07:42:09.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CountriesMastersController.cs",
+              "DocumentMoniker": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\CountriesMastersController.cs",
+              "RelativeDocumentMoniker": "QuickXe_Api\\Controllers\\CountriesMastersController.cs",
+              "ToolTip": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\CountriesMastersController.cs",
+              "RelativeToolTip": "QuickXe_Api\\Controllers\\CountriesMastersController.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAswAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T05:48:13.416Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CountriesController.cs",
+              "DocumentMoniker": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\CountriesController.cs",
+              "RelativeDocumentMoniker": "QuickXe_Api\\Controllers\\CountriesController.cs",
+              "ToolTip": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Controllers\\CountriesController.cs",
+              "RelativeToolTip": "QuickXe_Api\\Controllers\\CountriesController.cs",
+              "ViewState": "AgIAANYAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T05:48:04.369Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EmailTemplate.html",
+              "DocumentMoniker": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Templates\\EmailTemplate.html",
+              "RelativeDocumentMoniker": "QuickXe_Api\\Templates\\EmailTemplate.html",
+              "ToolTip": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\Templates\\EmailTemplate.html",
+              "RelativeToolTip": "QuickXe_Api\\Templates\\EmailTemplate.html",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-04-08T05:47:41.839Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\appsettings.json",
+              "RelativeDocumentMoniker": "QuickXe_Api\\appsettings.json",
+              "ToolTip": "D:\\Fadel-Projects\\QuickXe_API\\QuickXe_Api\\appsettings.json",
+              "RelativeToolTip": "QuickXe_Api\\appsettings.json",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAwBAAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-08T05:43:20.951Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
