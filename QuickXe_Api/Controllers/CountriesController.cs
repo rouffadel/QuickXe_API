@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -125,43 +125,91 @@ namespace CountryAPI.Controllers
 
         // POST: api/Countries
         [HttpPost]
+        //public async Task<IActionResult> PostCountry(CreateCountryDTO country)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            Country countryDetail = new Country()
+        //            {
+        //                CountryName = country.CountryName,
+        //                CountryCode = country.CountryCode,
+        //                CurrencyName = country.CurrencyName,
+        //                BuyRate = country.BuyRate,
+        //                SellRate = country.SellRate,
+        //                TenantId = country.TenantId,
+        //            };
+
+        //            _context.Countries.Add(countryDetail);
+        //            await _context.SaveChangesAsync();
+        //            return CreatedAtAction("GetCountryById", new { id = countryDetail.CountryId }, countryDetail);
+        //        }
+        //        else
+        //        {
+        //            return BadRequest(ModelState);
+        //        }
+        //    }
+        //    catch (Exception E)
+        //    {
+        //        string msg = "";
+        //        if (E.InnerException != null)
+        //        {
+        //            msg = E.InnerException.Message;
+        //        }
+        //        else
+        //        {
+        //            msg = E.Message;
+        //        }
+        //        return StatusCode(500, msg);
+        //    }
+        //}
+
+
         public async Task<IActionResult> PostCountry(CreateCountryDTO country)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    Country countryDetail = new Country()
-                    {
-                        CountryName = country.CountryName,
-                        CountryCode = country.CountryCode,
-                        CurrencyName = country.CurrencyName,
-                        BuyRate = country.BuyRate,
-                        SellRate = country.SellRate,
-                        TenantId = country.TenantId,
-                    };
-
-                    _context.Countries.Add(countryDetail);
-                    await _context.SaveChangesAsync();
-                    return CreatedAtAction("GetCountryById", new { id = countryDetail.CountryId }, countryDetail);
-                }
-                else
-                {
+                if (!ModelState.IsValid)
                     return BadRequest(ModelState);
+
+                // ✅ Check if country already exists (case-insensitive)
+                var existingCountry = await _context.Countries
+                    .AnyAsync(c =>
+                        c.CountryName.ToLower() == country.CountryName.ToLower() &&
+                        c.TenantId == country.TenantId
+                    );
+
+                if (existingCountry)
+                {
+                    return Conflict(new
+                    {
+                        message = $"Country '{country.CountryName}' already exists."
+                    });
                 }
+
+                Country countryDetail = new Country()
+                {
+                    CountryName = country.CountryName,
+                    CountryCode = country.CountryCode,
+                    CurrencyName = country.CurrencyName,
+                    BuyRate = country.BuyRate,
+                    SellRate = country.SellRate,
+                    TenantId = country.TenantId,
+                };
+
+                _context.Countries.Add(countryDetail);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(
+                    "GetCountryById",
+                    new { id = countryDetail.CountryId },
+                    countryDetail
+                );
             }
-            catch (Exception E)
+            catch (Exception ex)
             {
-                string msg = "";
-                if (E.InnerException != null)
-                {
-                    msg = E.InnerException.Message;
-                }
-                else
-                {
-                    msg = E.Message;
-                }
-                return StatusCode(500, msg);
+                return StatusCode(500, ex.InnerException?.Message ?? ex.Message);
             }
         }
 
