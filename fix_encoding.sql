@@ -1,0 +1,261 @@
+USE [QuickXeCRUD];
+GO
+
+-- RE-POPULATE with N prefix for UNICODE support
+UPDATE [dbo].[CountriesMaster]
+SET [CurrencySymbol] = CASE 
+    -- A
+    WHEN [CountryCode] = 'AF' THEN N'؋'
+    WHEN [CountryCode] = 'AL' THEN N'L'
+    WHEN [CountryCode] = 'DZ' THEN N'د.ج'
+    WHEN [CountryCode] = 'AD' THEN N'€'
+    WHEN [CountryCode] = 'AO' THEN N'Kz'
+    WHEN [CountryCode] = 'AG' THEN N'$'
+    WHEN [CountryCode] = 'AR' THEN N'$'
+    WHEN [CountryCode] = 'AM' THEN N'֏'
+    WHEN [CountryCode] = 'AU' THEN N'$'
+    WHEN [CountryCode] = 'AT' THEN N'€'
+    WHEN [CountryCode] = 'AZ' THEN N'₼'
+
+    -- B
+    WHEN [CountryCode] = 'BS' THEN N'$'
+    WHEN [CountryCode] = 'BH' THEN N'.د.ب'
+    WHEN [CountryCode] = 'BD' THEN N'৳'
+    WHEN [CountryCode] = 'BB' THEN N'$'
+    WHEN [CountryCode] = 'BY' THEN N'Br'
+    WHEN [CountryCode] = 'BE' THEN N'€'
+    WHEN [CountryCode] = 'BZ' THEN N'$'
+    WHEN [CountryCode] = 'BJ' THEN N'CFA'
+    WHEN [CountryCode] = 'BT' THEN N'Nu.'
+    WHEN [CountryCode] = 'BO' THEN N'Bs.'
+    WHEN [CountryCode] = 'BA' THEN N'KM'
+    WHEN [CountryCode] = 'BW' THEN N'P'
+    WHEN [CountryCode] = 'BR' THEN N'R$'
+    WHEN [CountryCode] = 'BN' THEN N'$'
+    WHEN [CountryCode] = 'BG' THEN N'лв'
+    WHEN [CountryCode] = 'BF' THEN N'CFA'
+    WHEN [CountryCode] = 'BI' THEN N'Fr'
+
+    -- C
+    WHEN [CountryCode] = 'KH' THEN N'៛'
+    WHEN [CountryCode] = 'CM' THEN N'CFA'
+    WHEN [CountryCode] = 'CA' THEN N'$'
+    WHEN [CountryCode] = 'CV' THEN N'$'
+    WHEN [CountryCode] = 'CF' THEN N'CFA'
+    WHEN [CountryCode] = 'TD' THEN N'CFA'
+    WHEN [CountryCode] = 'CL' THEN N'$'
+    WHEN [CountryCode] = 'CN' THEN N'¥'
+    WHEN [CountryCode] = 'CO' THEN N'$'
+    WHEN [CountryCode] = 'KM' THEN N'Fr'
+    WHEN [CountryCode] = 'CG' THEN N'CFA'
+    WHEN [CountryCode] = 'CD' THEN N'Fr'
+    WHEN [CountryCode] = 'CR' THEN N'₡'
+    WHEN [CountryCode] = 'HR' THEN N'€'
+    WHEN [CountryCode] = 'CU' THEN N'$'
+    WHEN [CountryCode] = 'CY' THEN N'€'
+    WHEN [CountryCode] = 'CZ' THEN N'Kč'
+
+    -- D
+    WHEN [CountryCode] = 'DK' THEN N'kr'
+    WHEN [CountryCode] = 'DJ' THEN N'Fr'
+    WHEN [CountryCode] = 'DM' THEN N'$'
+    WHEN [CountryCode] = 'DO' THEN N'$'
+
+    -- E
+    WHEN [CountryCode] = 'EC' THEN N'$'
+    WHEN [CountryCode] = 'EG' THEN N'E£'
+    WHEN [CountryCode] = 'SV' THEN N'$'
+    WHEN [CountryCode] = 'GQ' THEN N'CFA'
+    WHEN [CountryCode] = 'ER' THEN N'Nfk'
+    WHEN [CountryCode] = 'EE' THEN N'€'
+    WHEN [CountryCode] = 'SZ' THEN N'L'
+    WHEN [CountryCode] = 'ET' THEN N'Br'
+
+    -- F
+    WHEN [CountryCode] = 'FJ' THEN N'$'
+    WHEN [CountryCode] = 'FI' THEN N'€'
+    WHEN [CountryCode] = 'FR' THEN N'€'
+
+    -- G
+    WHEN [CountryCode] = 'GA' THEN N'CFA'
+    WHEN [CountryCode] = 'GM' THEN N'D'
+    WHEN [CountryCode] = 'GE' THEN N'₾'
+    WHEN [CountryCode] = 'DE' THEN N'€'
+    WHEN [CountryCode] = 'GH' THEN N'₵'
+    WHEN [CountryCode] = 'GR' THEN N'€'
+    WHEN [CountryCode] = 'GD' THEN N'$'
+    WHEN [CountryCode] = 'GT' THEN N'Q'
+    WHEN [CountryCode] = 'GN' THEN N'Fr'
+    WHEN [CountryCode] = 'GW' THEN N'CFA'
+    WHEN [CountryCode] = 'GY' THEN N'$'
+
+    -- H
+    WHEN [CountryCode] = 'HT' THEN N'G'
+    WHEN [CountryCode] = 'HN' THEN N'L'
+    WHEN [CountryCode] = 'HK' THEN N'$'
+    WHEN [CountryCode] = 'HU' THEN N'Ft'
+
+    -- I
+    WHEN [CountryCode] = 'IS' THEN N'kr'
+    WHEN [CountryCode] = 'IN' THEN N'₹'
+    WHEN [CountryCode] = 'ID' THEN N'Rp'
+    WHEN [CountryCode] = 'IR' THEN N'﷼'
+    WHEN [CountryCode] = 'IQ' THEN N'ع.د'
+    WHEN [CountryCode] = 'IE' THEN N'€'
+    WHEN [CountryCode] = 'IL' THEN N'₪'
+    WHEN [CountryCode] = 'IT' THEN N'€'
+    WHEN [CountryCode] = 'CI' THEN N'CFA'
+
+    -- J
+    WHEN [CountryCode] = 'JM' THEN N'$'
+    WHEN [CountryCode] = 'JP' THEN N'¥'
+    WHEN [CountryCode] = 'JO' THEN N'د.ا'
+
+    -- K
+    WHEN [CountryCode] = 'KZ' THEN N'₸'
+    WHEN [CountryCode] = 'KE' THEN N'KSh'
+    WHEN [CountryCode] = 'KI' THEN N'$'
+    WHEN [CountryCode] = 'KP' THEN N'₩'
+    WHEN [CountryCode] = 'KR' THEN N'₩'
+    WHEN [CountryCode] = 'KW' THEN N'د.ك'
+    WHEN [CountryCode] = 'KG' THEN N'с'
+
+    -- L
+    WHEN [CountryCode] = 'LA' THEN N'₭'
+    WHEN [CountryCode] = 'LV' THEN N'€'
+    WHEN [CountryCode] = 'LB' THEN N'ل.ل'
+    WHEN [CountryCode] = 'LS' THEN N'L'
+    WHEN [CountryCode] = 'LR' THEN N'$'
+    WHEN [CountryCode] = 'LY' THEN N'ل.د'
+    WHEN [CountryCode] = 'LI' THEN N'Fr'
+    WHEN [CountryCode] = 'LT' THEN N'€'
+    WHEN [CountryCode] = 'LU' THEN N'€'
+
+    -- M
+    WHEN [CountryCode] = 'MG' THEN N'Ar'
+    WHEN [CountryCode] = 'MW' THEN N'MK'
+    WHEN [CountryCode] = 'MY' THEN N'RM'
+    WHEN [CountryCode] = 'MV' THEN N'Rv'
+    WHEN [CountryCode] = 'ML' THEN N'CFA'
+    WHEN [CountryCode] = 'MT' THEN N'€'
+    WHEN [CountryCode] = 'MH' THEN N'$'
+    WHEN [CountryCode] = 'MR' THEN N'UM'
+    WHEN [CountryCode] = 'MU' THEN N'₨'
+    WHEN [CountryCode] = 'MX' THEN N'$'
+    WHEN [CountryCode] = 'FM' THEN N'$'
+    WHEN [CountryCode] = 'MD' THEN N'L'
+    WHEN [CountryCode] = 'MC' THEN N'€'
+    WHEN [CountryCode] = 'MN' THEN N'₮'
+    WHEN [CountryCode] = 'ME' THEN N'€'
+    WHEN [CountryCode] = 'MA' THEN N'د.م.'
+    WHEN [CountryCode] = 'MZ' THEN N'MT'
+    WHEN [CountryCode] = 'MM' THEN N'K'
+
+    -- N
+    WHEN [CountryCode] = 'NA' THEN N'$'
+    WHEN [CountryCode] = 'NR' THEN N'$'
+    WHEN [CountryCode] = 'NP' THEN N'₨'
+    WHEN [CountryCode] = 'NL' THEN N'€'
+    WHEN [CountryCode] = 'NZ' THEN N'$'
+    WHEN [CountryCode] = 'NI' THEN N'C$'
+    WHEN [CountryCode] = 'NE' THEN N'CFA'
+    WHEN [CountryCode] = 'NG' THEN N'₦'
+    WHEN [CountryCode] = 'MK' THEN N'ден'
+    WHEN [CountryCode] = 'NO' THEN N'kr'
+
+    -- O
+    WHEN [CountryCode] = 'OM' THEN N'﷼'
+
+    -- P
+    WHEN [CountryCode] = 'PK' THEN N'₨'
+    WHEN [CountryCode] = 'PW' THEN N'$'
+    WHEN [CountryCode] = 'PA' THEN N'B/.'
+    WHEN [CountryCode] = 'PG' THEN N'K'
+    WHEN [CountryCode] = 'PY' THEN N'Gs'
+    WHEN [CountryCode] = 'PE' THEN N'S/'
+    WHEN [CountryCode] = 'PH' THEN N'₱'
+    WHEN [CountryCode] = 'PL' THEN N'zł'
+    WHEN [CountryCode] = 'PT' THEN N'€'
+
+    -- Q
+    WHEN [CountryCode] = 'QA' THEN N'﷼'
+
+    -- R
+    WHEN [CountryCode] = 'RO' THEN N'lei'
+    WHEN [CountryCode] = 'RU' THEN N'₽'
+    WHEN [CountryCode] = 'RW' THEN N'Fr'
+
+    -- S
+    WHEN [CountryCode] = 'KN' THEN N'$'
+    WHEN [CountryCode] = 'LC' THEN N'$'
+    WHEN [CountryCode] = 'VC' THEN N'$'
+    WHEN [CountryCode] = 'WS' THEN N'T'
+    WHEN [CountryCode] = 'SM' THEN N'€'
+    WHEN [CountryCode] = 'ST' THEN N'Db'
+    WHEN [CountryCode] = 'SA' THEN N'﷼'
+    WHEN [CountryCode] = 'SN' THEN N'CFA'
+    WHEN [CountryCode] = 'RS' THEN N'дин.'
+    WHEN [CountryCode] = 'SC' THEN N'₨'
+    WHEN [CountryCode] = 'SL' THEN N'Le'
+    WHEN [CountryCode] = 'SG' THEN N'$'
+    WHEN [CountryCode] = 'SK' THEN N'€'
+    WHEN [CountryCode] = 'SI' THEN N'€'
+    WHEN [CountryCode] = 'SB' THEN N'$'
+    WHEN [CountryCode] = 'SO' THEN N'S'
+    WHEN [CountryCode] = 'ZA' THEN N'R'
+    WHEN [CountryCode] = 'SS' THEN N'£'
+    WHEN [CountryCode] = 'ES' THEN N'€'
+    WHEN [CountryCode] = 'LK' THEN N'Rs'
+    WHEN [CountryCode] = 'SD' THEN N'ج.س.'
+    WHEN [CountryCode] = 'SR' THEN N'$'
+    WHEN [CountryCode] = 'SE' THEN N'kr'
+    WHEN [CountryCode] = 'CH' THEN N'Fr'
+    WHEN [CountryCode] = 'SY' THEN N'£'
+
+    -- T
+    WHEN [CountryCode] = 'TW' THEN N'NT$'
+    WHEN [CountryCode] = 'TJ' THEN N'SM'
+    WHEN [CountryCode] = 'TZ' THEN N'TSh'
+    WHEN [CountryCode] = 'TH' THEN N'฿'
+    WHEN [CountryCode] = 'TL' THEN N'$'
+    WHEN [CountryCode] = 'TG' THEN N'CFA'
+    WHEN [CountryCode] = 'TO' THEN N'T$'
+    WHEN [CountryCode] = 'TT' THEN N'$'
+    WHEN [CountryCode] = 'TN' THEN N'د.ت'
+    WHEN [CountryCode] = 'TR' THEN N'₺'
+    WHEN [CountryCode] = 'TM' THEN N'm'
+    WHEN [CountryCode] = 'TV' THEN N'$'
+
+    -- U
+    WHEN [CountryCode] = 'UG' THEN N'USh'
+    WHEN [CountryCode] = 'UA' THEN N'₴'
+    WHEN [CountryCode] = 'AE' THEN N'د.إ'
+    WHEN [CountryCode] = 'GB' THEN N'£'
+    WHEN [CountryCode] = 'US' THEN N'$'
+    WHEN [CountryCode] = 'UY' THEN N'$U'
+    WHEN [CountryCode] = 'UZ' THEN N'so''m'
+
+    -- V
+    WHEN [CountryCode] = 'VU' THEN N'Vt'
+    WHEN [CountryCode] = 'VA' THEN N'€'
+    WHEN [CountryCode] = 'VE' THEN N'Bs.'
+    WHEN [CountryCode] = 'VN' THEN N'₫'
+
+    -- Y
+    WHEN [CountryCode] = 'YE' THEN N'﷼'
+
+    -- Z
+    WHEN [CountryCode] = 'ZM' THEN N'ZK'
+    WHEN [CountryCode] = 'ZW' THEN N'$'
+
+    ELSE [CurrencySymbol]
+END;
+GO
+
+-- 2. Sync to Country table again
+UPDATE c
+SET c.[CurrencySymbol] = cm.[CurrencySymbol]
+FROM [dbo].[Country] c
+INNER JOIN [dbo].[CountriesMaster] cm ON c.[CountryCode] = cm.[CountryCode]
+WHERE cm.[CurrencySymbol] IS NOT NULL;
+GO

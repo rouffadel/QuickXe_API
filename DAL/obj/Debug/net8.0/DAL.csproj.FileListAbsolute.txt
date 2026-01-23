@@ -27,3 +27,33 @@ D:\Fadel-Projects\QuickXe_API\DAL\obj\Debug\net8.0\refint\DAL.dll
 D:\Fadel-Projects\QuickXe_API\DAL\obj\Debug\net8.0\DAL.pdb
 D:\Fadel-Projects\QuickXe_API\DAL\obj\Debug\net8.0\DAL.genruntimeconfig.cache
 D:\Fadel-Projects\QuickXe_API\DAL\obj\Debug\net8.0\ref\DAL.dll
+D:\fadel\QuickXe_API\DAL\bin\Debug\net8.0\DAL.deps.json
+D:\fadel\QuickXe_API\DAL\bin\Debug\net8.0\DAL.runtimeconfig.json
+D:\fadel\QuickXe_API\DAL\bin\Debug\net8.0\DAL.dll
+D:\fadel\QuickXe_API\DAL\bin\Debug\net8.0\DAL.pdb
+D:\fadel\QuickXe_API\DAL\obj\Debug\net8.0\DAL.csproj.AssemblyReference.cache
+D:\fadel\QuickXe_API\DAL\obj\Debug\net8.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\fadel\QuickXe_API\DAL\obj\Debug\net8.0\DAL.AssemblyInfoInputs.cache
+D:\fadel\QuickXe_API\DAL\obj\Debug\net8.0\DAL.AssemblyInfo.cs
+D:\fadel\QuickXe_API\DAL\obj\Debug\net8.0\DAL.csproj.CoreCompileInputs.cache
+D:\fadel\QuickXe_API\DAL\obj\Debug\net8.0\DAL.sourcelink.json
+D:\fadel\QuickXe_API\DAL\obj\Debug\net8.0\DAL.dll
+D:\fadel\QuickXe_API\DAL\obj\Debug\net8.0\refint\DAL.dll
+D:\fadel\QuickXe_API\DAL\obj\Debug\net8.0\DAL.pdb
+D:\fadel\QuickXe_API\DAL\obj\Debug\net8.0\DAL.genruntimeconfig.cache
+D:\fadel\QuickXe_API\DAL\obj\Debug\net8.0\ref\DAL.dll
+D:\fadel\Full Stack\QuickXe_API\DAL\bin\Debug\net8.0\DAL.deps.json
+D:\fadel\Full Stack\QuickXe_API\DAL\bin\Debug\net8.0\DAL.runtimeconfig.json
+D:\fadel\Full Stack\QuickXe_API\DAL\bin\Debug\net8.0\DAL.dll
+D:\fadel\Full Stack\QuickXe_API\DAL\bin\Debug\net8.0\DAL.pdb
+D:\fadel\Full Stack\QuickXe_API\DAL\obj\Debug\net8.0\DAL.csproj.AssemblyReference.cache
+D:\fadel\Full Stack\QuickXe_API\DAL\obj\Debug\net8.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\fadel\Full Stack\QuickXe_API\DAL\obj\Debug\net8.0\DAL.AssemblyInfoInputs.cache
+D:\fadel\Full Stack\QuickXe_API\DAL\obj\Debug\net8.0\DAL.AssemblyInfo.cs
+D:\fadel\Full Stack\QuickXe_API\DAL\obj\Debug\net8.0\DAL.csproj.CoreCompileInputs.cache
+D:\fadel\Full Stack\QuickXe_API\DAL\obj\Debug\net8.0\DAL.sourcelink.json
+D:\fadel\Full Stack\QuickXe_API\DAL\obj\Debug\net8.0\DAL.dll
+D:\fadel\Full Stack\QuickXe_API\DAL\obj\Debug\net8.0\refint\DAL.dll
+D:\fadel\Full Stack\QuickXe_API\DAL\obj\Debug\net8.0\DAL.pdb
+D:\fadel\Full Stack\QuickXe_API\DAL\obj\Debug\net8.0\DAL.genruntimeconfig.cache
+D:\fadel\Full Stack\QuickXe_API\DAL\obj\Debug\net8.0\ref\DAL.dll

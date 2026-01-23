@@ -1,12 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "uTYghbTMc51fVm0ikmp0+2wDyMQndLzpYojeRosTTfs=",
-  "Source": "QuickXe_Api",
-  "BasePath": "_content/QuickXe_Api",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
-}
+{"Version":1,"Hash":"XnYMDa6RHkr8Gp85F2trMD4kQSmtFWI3ZjSN3rzWQKM=","Source":"QuickXe_Api","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}

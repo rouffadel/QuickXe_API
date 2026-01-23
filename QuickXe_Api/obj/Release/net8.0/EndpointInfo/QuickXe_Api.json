@@ -1429,6 +1429,14 @@
           "currencyName": {
             "type": "string",
             "nullable": true
+          },
+          "currencyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencySymbol": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -1452,6 +1460,10 @@
             "type": "string",
             "nullable": true
           },
+          "currencyCode": {
+            "type": "string",
+            "nullable": true
+          },
           "buyRate": {
             "type": "number",
             "format": "double",
@@ -1460,6 +1472,14 @@
           "sellRate": {
             "type": "number",
             "format": "double",
+            "nullable": true
+          },
+          "currencyAvailable": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "currencySymbol": {
+            "type": "string",
             "nullable": true
           },
           "tenantId": {
@@ -1490,6 +1510,10 @@
             "type": "string",
             "nullable": true
           },
+          "currencyCode": {
+            "type": "string",
+            "nullable": true
+          },
           "buyRate": {
             "type": "number",
             "format": "double",
@@ -1501,6 +1525,14 @@
             "nullable": true
           },
           "tenantId": {
+            "type": "string",
+            "nullable": true
+          },
+          "currencyAvailable": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "currencySymbol": {
             "type": "string",
             "nullable": true
           }

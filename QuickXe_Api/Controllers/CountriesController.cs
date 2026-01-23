@@ -44,8 +44,11 @@ namespace CountryAPI.Controllers
                     country.CountryId,
                     country.CountryCode,
                     country.CurrencyName,
+                    country.CurrencyCode,
                     country.BuyRate,
                     country.SellRate,
+                    country.CurrencyAvailable,
+                    country.CurrencySymbol,
                     country.TenantId,
                     TenantName = _context.ApplicationUser
                         .Where(user => user.Id == country.TenantId)
@@ -188,19 +191,45 @@ namespace CountryAPI.Controllers
                     });
                 }
 
+                // Auto-populate CurrencySymbol and CurrencyCode from CountriesMaster if not provided
+                string finalCurrencySymbol = country.CurrencySymbol;
+                string finalCurrencyCode = country.CurrencyCode;
+                if (!string.IsNullOrEmpty(country.CountryCode))
+                {
+                    string searchCode = country.CountryCode.Trim().ToLower();
+                    var masterCountry = await _context.CountriesMaster
+                        .FirstOrDefaultAsync(cm => cm.CountryCode != null && cm.CountryCode.Trim().ToLower() == searchCode);
+                    
+                    if (masterCountry != null)
+                    {
+                        if (string.IsNullOrEmpty(finalCurrencySymbol))
+                        {
+                            finalCurrencySymbol = masterCountry.CurrencySymbol;
+                        }
+                        if (string.IsNullOrEmpty(finalCurrencyCode))
+                        {
+                            finalCurrencyCode = masterCountry.CurrencyCode;
+                        }
+                    }
+                }
+
                 Country countryDetail = new Country()
                 {
                     CountryName = country.CountryName,
                     CountryCode = country.CountryCode,
                     CurrencyName = country.CurrencyName,
+                    CurrencyCode = finalCurrencyCode,
                     BuyRate = country.BuyRate,
                     SellRate = country.SellRate,
+                    CurrencyAvailable = country.CurrencyAvailable,
+                    CurrencySymbol = finalCurrencySymbol,
                     TenantId = country.TenantId,
                 };
 
                 _context.Countries.Add(countryDetail);
                 await _context.SaveChangesAsync();
-
+                
+                // Return the complete object including the potentially auto-populated symbol
                 return CreatedAtAction(
                     "GetCountryById",
                     new { id = countryDetail.CountryId },

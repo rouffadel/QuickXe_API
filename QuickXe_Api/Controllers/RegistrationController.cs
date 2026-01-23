@@ -201,48 +201,85 @@ namespace QuickXe_Api.Controllers
 
 
 
+        //[HttpPost("register")]
+        //public async Task<IActionResult> Register([FromBody] RegistrationRequest model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    using (var transaction = await _context.Database.BeginTransactionAsync())
+        //    {
+        //        try
+        //        {
+        //            // First, insert the registration record
+        //            var response = await _registration.Register(model);
+
+        //            // Create a SendEmail object
+        //            var sendEmailDto = new CreateSendEmailDTO
+        //            {
+        //                UserId = response.UserId, // Assuming response has UserId
+        //            };
+
+        //            // Add the SendEmail record
+        //            SendEmail sendEmailDetail = new SendEmail()
+        //            {
+        //                UserId = sendEmailDto.UserId,
+        //            };
+
+        //            _context.SendEmails.Add(sendEmailDetail);
+
+        //            // Save both changes in the transaction
+        //            await _context.SaveChangesAsync();
+
+        //            // Commit transaction
+        //            await transaction.CommitAsync();
+
+        //            return Ok(new { Status = "OK", Data = response });
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            await transaction.RollbackAsync();
+        //            return BadRequest(new { Status = "Error", Message = ex.Message.ToString() });
+        //        }
+        //    }
+        //}
+
+
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationRequest model)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
-            using (var transaction = await _context.Database.BeginTransactionAsync())
+            try
             {
-                try
+                // Create user using Identity (handles transaction internally)
+                var response = await _registration.Register(model);
+
+                if (!response.Status)
+                    return BadRequest(new { Status = "Error", Message = response.Message });
+
+                // Insert SendEmail separately
+                var sendEmailDetail = new SendEmail
                 {
-                    // First, insert the registration record
-                    var response = await _registration.Register(model);
+                    UserId = response.UserId
+                };
 
-                    // Create a SendEmail object
-                    var sendEmailDto = new CreateSendEmailDTO
-                    {
-                        UserId = response.UserId, // Assuming response has UserId
-                    };
+                _context.SendEmails.Add(sendEmailDetail);
+                await _context.SaveChangesAsync();
 
-                    // Add the SendEmail record
-                    SendEmail sendEmailDetail = new SendEmail()
-                    {
-                        UserId = sendEmailDto.UserId,
-                    };
-
-                    _context.SendEmails.Add(sendEmailDetail);
-
-                    // Save both changes in the transaction
-                    await _context.SaveChangesAsync();
-
-                    // Commit transaction
-                    await transaction.CommitAsync();
-
-                    return Ok(new { Status = "OK", Data = response });
-                }
-                catch (Exception ex)
+                return Ok(new { Status = "OK", Data = response });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
                 {
-                    await transaction.RollbackAsync();
-                    return BadRequest(new { Status = "Error", Message = ex.Message.ToString() });
-                }
+                    Status = "Error",
+                    Message = ex.Message
+                });
             }
         }
 

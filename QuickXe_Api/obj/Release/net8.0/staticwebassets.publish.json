@@ -1,12 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "jo68v6JS6sOh8jBLGlVodjy9nKVRaRnnhTZh6CnRixY=",
-  "Source": "QuickXe_Api",
-  "BasePath": "_content/QuickXe_Api",
-  "Mode": "Default",
-  "ManifestType": "Publish",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
-}
+{"Version":1,"Hash":"/zC3DM/AX0xA6pVwlJv1KR7D5rRq5qDd7ttJnj2nctQ=","Source":"QuickXe_Api","BasePath":"/","Mode":"Root","ManifestType":"Publish","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
