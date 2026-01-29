@@ -33,6 +33,7 @@ builder.Services.AddControllers()
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpSettings"));
 
 builder.Services.AddScoped<IMailService, MailService>();
+builder.Services.AddScoped<ITwilioService, MetaWhatsAppService>();
 
 
 builder.Services.AddSwaggerGen(setup =>
@@ -156,12 +157,12 @@ else
 app.UseDirectoryBrowser();
 
 app.UseRouting();
-
+app.UseCors();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors();
+
 
 app.MapControllers();
 

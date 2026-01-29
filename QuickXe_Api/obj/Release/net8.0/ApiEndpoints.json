@@ -412,7 +412,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "DAL.DAO.CustomerOTP",
+        "Type": "DAL.DAO.Customer",
         "MediaTypes": [
           "text/plain",
           "application/json",

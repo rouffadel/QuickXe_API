@@ -25,6 +25,7 @@ namespace DAL.DAO
         }
 
         public int Id { get; set; }
+        [JsonIgnore]
         public string OTP { get; set; }
         public DateTime CreatedOn { get; set; }
 

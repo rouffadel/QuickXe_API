@@ -11,6 +11,6 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>DAL.OrganizationDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
-    <NameOfLastUsedPublishProfile>D:\fadel\Full Stack\QuickXe_API\QuickXe_Api\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>D:\fadel\quickxe\QuickXe_API\QuickXe_Api\Properties\PublishProfiles\FolderProfile2.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

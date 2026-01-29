@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\fadel\\Full Stack\\QuickXe_API\\DAL\\DAL.csproj": {}
+    "D:\\fadel\\QuickXe_API\\DAL\\DAL.csproj": {}
   },
   "projects": {
-    "D:\\fadel\\Full Stack\\QuickXe_API\\DAL\\DAL.csproj": {
+    "D:\\fadel\\QuickXe_API\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\fadel\\Full Stack\\QuickXe_API\\DAL\\DAL.csproj",
+        "projectUniqueName": "D:\\fadel\\QuickXe_API\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "D:\\fadel\\Full Stack\\QuickXe_API\\DAL\\DAL.csproj",
+        "projectPath": "D:\\fadel\\QuickXe_API\\DAL\\DAL.csproj",
         "packagesPath": "C:\\Users\\Fadelsoft\\.nuget\\packages\\",
-        "outputPath": "D:\\fadel\\Full Stack\\QuickXe_API\\DAL\\obj\\",
+        "outputPath": "D:\\fadel\\QuickXe_API\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -67,6 +67,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.12, )"
+            },
+            "Twilio": {
+              "target": "Package",
+              "version": "[7.14.2, )"
             }
           },
           "imports": [

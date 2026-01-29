@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using DAL;
 using DAL.DAO;
 using DAL.DTO;
 using DAL.Models;
+using DAL.Interface;
 using Azure;
 using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
@@ -19,14 +21,17 @@ namespace QuickXe_Api.Controllers
     public class CustomerOTPsController : ControllerBase
     {
         private readonly OrganizationDbContext _context;
+        private readonly ITwilioService _twilioService;
 
-        public CustomerOTPsController(OrganizationDbContext context)
+        public CustomerOTPsController(OrganizationDbContext context, ITwilioService twilioService)
         {
             _context = context;
+            _twilioService = twilioService;
         }
 
         // GET: api/CustomerOTPs
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<CustomerOTP>>> GetCustomerOTPs()
         {
             return await _context.CustomerOTPs.ToListAsync();
@@ -34,6 +39,7 @@ namespace QuickXe_Api.Controllers
 
         // GET: api/CustomerOTPs/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<CustomerOTP>> GetCustomerOTP(int id)
         {
             var customerOTP = await _context.CustomerOTPs.FindAsync(id);
@@ -98,6 +104,15 @@ namespace QuickXe_Api.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    // Check if Login (OTPType == 2) and user exists
+                    if (customerOTP.OTPType == 2)
+                    {
+                        var exists = _context.Customers.Any(x => x.PhoneNumber == customerOTP.PhoneNumber);
+                        if (!exists)
+                        {
+                            return NotFound(new { message = "User not registered. Please sign up first." });
+                        }
+                    }
                     CustomerOTP customerOTPDetail = new CustomerOTP()
                     {
                         PhoneNumber = customerOTP.PhoneNumber,
@@ -107,6 +122,10 @@ namespace QuickXe_Api.Controllers
 
                     _context.CustomerOTPs.Add(customerOTPDetail);
                     await _context.SaveChangesAsync();
+
+                    // Send OTP via WhatsApp using Twilio
+                    await _twilioService.SendOtpWhatsAppAsync(customerOTPDetail.PhoneNumber, customerOTPDetail.OTP);
+
                     return CreatedAtAction("GetCustomerOTP", new { id = customerOTPDetail.Id }, customerOTPDetail);
                 }
                 else
@@ -190,53 +209,52 @@ namespace QuickXe_Api.Controllers
                 return BadRequest(new { message = "Invalid request data." });
             }
 
-            // Check if the phone number exists in the customers table
-            bool phoneExists = await _context.Customers.AnyAsync(p => p.PhoneNumber == request.PhoneNumber);
-            if (phoneExists)
-            {
-                return Ok(new { message = "Phone number found." });
-            }
+            // Note: In the registration flow, the customer is created BEFORE OTP validation.
+            // So we should NOT block if the phone number exists. We should proceed to validate the OTP.
 
-
-
-            // Retrieve the stored OTP and its expiration time
-            var storedOtp = await _context.CustomerOTPs
-                                          .Where(c => c.PhoneNumber == request.PhoneNumber && c.OTPType == 1)
+            var phoneNumber = request.PhoneNumber.Trim();
+            // Get the most recent OTP for this phone number (any type)
+            var latestOtp = await _context.CustomerOTPs
+                                          .Where(c => c.PhoneNumber.Trim() == phoneNumber)
                                           .OrderByDescending(c => c.CreatedOn)
-                                          .Select(c => new { c.OTP, c.ExpireOn })
+                                          .Select(c => new { c.OTP, c.ExpireOn, c.OTPType })
                                           .FirstOrDefaultAsync();
 
-
-          
-
-            // Retrieve the PhoneNumber separately
-            var phoneNumber = await _context.CustomerOTPs
-                                     .Where(cd => cd.PhoneNumber == request.PhoneNumber)
-                                     .Select(cd => cd.PhoneNumber)
-                                     .FirstOrDefaultAsync();
-
-            // Check if OTP exists for the given Code
-            if (storedOtp == null)
+            // Check if OTP exists
+            if (latestOtp == null)
             {
-                return NotFound(new { message = "Code not found." });
+                return NotFound(new { message = "No OTP found. Please request a new OTP." });
             }
 
-          
-
             // Check if the OTP is expired
-            if (storedOtp.ExpireOn < DateTime.Now)
+            if (latestOtp.ExpireOn < DateTime.Now)
             {
-                return BadRequest(new { message = "OTP has expired." });
+                return BadRequest(new { message = "OTP has expired. Please request a new OTP." });
             }
 
             // Compare OTP values
-            if (storedOtp.OTP == request.OTP)
+            if (latestOtp.OTP.Trim() == request.OTP.Trim())
             {
-                return Ok(new { Status = "OK", Data = phoneNumber });
+                // OTP is valid. Fetch customer data to allow Direct Login.
+                var customer = await _context.Customers
+                                            .Where(c => c.PhoneNumber == request.PhoneNumber)
+                                            .Select(c => new { c.CustomerId, c.Name, c.Email, c.PhoneNumber })
+                                            .FirstOrDefaultAsync();
+
+                if (customer != null)
+                {
+                    // Return OK status and Customer Data for session storage in frontend
+                    return Ok(new { Status = "OK", Message = "OTP Verified Successfully!", Data = customer });
+                }
+                else
+                {
+                    // Fallback if customer not found (should not happen in standard signup flow)
+                    return Ok(new { Status = "OK", Message = "OTP Verified!", Data = new { PhoneNumber = request.PhoneNumber } });
+                }
             }
             else
             {
-                return BadRequest(new { message = "Invalid OTP." });
+                return BadRequest(new { message = "Invalid OTP. Please check and try again." });
             }
         }
 
@@ -305,48 +323,46 @@ namespace QuickXe_Api.Controllers
             bool phoneExists = await _context.Customers.AnyAsync(p => p.PhoneNumber == request.PhoneNumber);
             if (!phoneExists)
             {
-                return NotFound(new { message = "Phone number not found." });
+                return NotFound(new { message = "Phone number not registered. Please sign up first." });
             }
 
-
-            // Retrieve the stored OTP and its expiration time
-            var storedOtp = await _context.CustomerOTPs
-                                          .Where(c => c.PhoneNumber == request.PhoneNumber && c.OTPType == 2)
+            var phoneNumber = request.PhoneNumber.Trim();
+            // Get the most recent OTP for this phone number (any type)
+            var latestOtp = await _context.CustomerOTPs
+                                          .Where(c => c.PhoneNumber.Trim() == phoneNumber)
                                           .OrderByDescending(c => c.CreatedOn)
-                                          .Select(c => new { c.OTP, c.ExpireOn })
+                                          .Select(c => new { c.OTP, c.ExpireOn, c.OTPType, c.CreatedOn })
                                           .FirstOrDefaultAsync();
 
-
-            var response = await _context.Customers.Where(b => b.PhoneNumber == request.PhoneNumber).Select(d => new { d.CustomerId, d.Name, d.Email }).FirstOrDefaultAsync();
-
-            // Retrieve the PhoneNumber separately
-            var phoneNumber = await _context.CustomerOTPs
-                                     .Where(cd => cd.PhoneNumber == request.PhoneNumber)
-                                     .Select(cd => cd.PhoneNumber)
-                                     .FirstOrDefaultAsync();
-
-            // Check if OTP exists for the given Code
-            if (storedOtp == null)
+            // Check if OTP exists
+            if (latestOtp == null)
             {
-                return NotFound(new { message = "Code not found." });
+                return NotFound(new { message = "No OTP found. Please request a new OTP." });
             }
 
-            
+            var response = await _context.Customers
+                                        .Where(b => b.PhoneNumber == request.PhoneNumber)
+                                        .Select(d => new { d.CustomerId, d.Name, d.Email })
+                                        .FirstOrDefaultAsync();
 
             // Check if the OTP is expired
-            if (storedOtp.ExpireOn < DateTime.Now)
+            if (latestOtp.ExpireOn < DateTime.Now)
             {
-                return BadRequest(new { message = "OTP has expired." });
+                return BadRequest(new { 
+                    message = "OTP has expired. Please request a new OTP.",
+                    expiredAt = latestOtp.ExpireOn,
+                    currentTime = DateTime.Now
+                });
             }
 
             // Compare OTP values
-            if (storedOtp.OTP == request.OTP)
+            if (latestOtp.OTP.Trim() == request.OTP.Trim())
             {
-                return Ok(new { Status = "OK", Data = response });
+                return Ok(new { Status = "OK", Message = "Login Successful!", Data = response });
             }
             else
             {
-                return BadRequest(new { message = "Invalid OTP." });
+                return BadRequest(new { message = "Invalid OTP. Please check and try again." });
             }
         }
 

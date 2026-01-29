@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\fadel\quickxe\QuickXe_API\QuickXe_Api\bin\Release\net8.0\publish\</_PublishTargetUrl>
+    <History>True|2026-01-28T10:58:23.0936359Z||;True|2026-01-28T14:20:35.4241905+05:30||;True|2026-01-28T11:22:37.3992856+05:30||;True|2026-01-27T19:49:35.6188807+05:30||;True|2026-01-27T19:48:25.2875655+05:30||;True|2026-01-27T19:30:09.9427518+05:30||;True|2026-01-27T19:29:32.5264505+05:30||;True|2026-01-27T19:11:14.5715889+05:30||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

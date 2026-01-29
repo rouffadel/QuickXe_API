@@ -151,56 +151,40 @@ namespace QuickXe_Api.Controllers
 
 
         [HttpPost("register")]
-        public async Task<ActionResult<CustomerOTP>> PostCustomer(CreateCustomerDTO customer)
+        public async Task<ActionResult<Customer>> PostCustomer(CreateCustomerDTO customer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            using (var transaction = await _context.Database.BeginTransactionAsync())
+            try
             {
-                try
+                // Check if customer already exists
+                bool exists = await _context.Customers.AnyAsync(c => c.PhoneNumber == customer.PhoneNumber);
+                if (exists)
                 {
-                    // First, insert the customer record
-                    Customer newCustomer = new Customer
-                    {
-                        Name = customer.Name,
-                        PhoneNumber = customer.PhoneNumber,
-                        Email = customer.Email,
-                        Address = customer.Address
-                    };
-
-                    _context.Customers.Add(newCustomer);
-                    await _context.SaveChangesAsync();
-
-                    //// Create a CustomerOTP object
-                    //var customerOTPDto = new CreateCustomerOTPDTO
-                    //{
-                    //    CustomerId = newCustomer.CustomerId, // Assuming response has UserId
-                    //};
-
-                    //// Add the CustomerOTP record
-                    //CustomerOTP customerOTPDetail = new CustomerOTP()
-                    //{
-                    //    CustomerId = customerOTPDto.CustomerId,
-                    //};
-
-                    //_context.CustomerOTPs.Add(customerOTPDetail);
-
-                    //// Save both changes in the transaction
-                    //await _context.SaveChangesAsync();
-
-                    // Commit transaction
-                    await transaction.CommitAsync();
-
-                    return Ok(new { Status = "OK", Data = newCustomer });
+                    return BadRequest(new { Status = "Error", Message = "Phone number already registered." });
                 }
-                catch (Exception ex)
+
+                // Create the customer record
+                Customer newCustomer = new Customer
                 {
-                    await transaction.RollbackAsync();
-                    return BadRequest(new { Status = "Error", Message = ex.Message.ToString() });
-                }
+                    Name = customer.Name,
+                    PhoneNumber = customer.PhoneNumber,
+                    Email = customer.Email,
+                    Address = customer.Address
+                };
+
+                _context.Customers.Add(newCustomer);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { Status = "OK", Message = "Customer Registered Successfully!", Data = newCustomer });
+            }
+            catch (Exception ex)
+            {
+                string msg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                return BadRequest(new { Status = "Error", Message = msg });
             }
         }
 
